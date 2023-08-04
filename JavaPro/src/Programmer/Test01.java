@@ -2,6 +2,7 @@ package Programmer;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Test01 {
@@ -28,7 +29,7 @@ public class Test01 {
 			int min = m.get(0);
 			for (int i = m.size() - 1; i >= 0; i--) {
 				if (m.get(i) - min == 0) {
-					m.remove(i);
+					m.remove(i);		//굳이 삭제를 안해도 된다고?
 				} else {
 					m.set(i, m.get(i) - min);
 				}
