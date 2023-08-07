@@ -9,23 +9,31 @@ public class Test01 {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("막대기 수 입력: ");
+		//System.out.print("막대기 수 입력: ");
 		ArrayList<Integer> m = new ArrayList<Integer>();
 		int n = scanner.nextInt();
-		System.out.print("막대기 길이 입력: ");
+		//System.out.print("막대기 길이 입력: ");
 		for (int i = 0; i < n; i++) {
 			m.add(scanner.nextInt());
 		}
 
 		// System.out.println(m);
 		CutOperation(m);
+		
+		long beforeTime = System.currentTimeMillis(); // 코드 실행 전에 시간 받아오기
+        
+		// 측정하려는 코드...
+		        
+		long afterTime = System.currentTimeMillis(); // 코드 실행 후에 시간 받아오기
+		long diffTime = afterTime - beforeTime; // 두 개의 실행 시간
+		System.out.println("실행 시간(ms): " + diffTime); 
 
 	} // main
 
 	private static void CutOperation(ArrayList<Integer> m) {
 		Collections.sort(m);
 		do {
-			System.out.println("남은 막대기 수:" + m.size());
+			System.out.println(m.size());
 			int min = m.get(0);
 			for (int i = m.size() - 1; i >= 0; i--) {
 				if (m.get(i) - min == 0) {
