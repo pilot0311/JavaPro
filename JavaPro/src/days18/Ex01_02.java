@@ -14,9 +14,8 @@ public class Ex01_02 {
 		//이름을 오름 차순 정렬 출력
 		Arrays.sort(names);
 		System.out.println(Arrays.toString(names));
+		
 		//이름을 내림 차순 정렬
-		
-		
 		//익명 클래스 [3]
 //		Arrays.sort(names, new Comparator<String>() {
 //
@@ -27,7 +26,6 @@ public class Ex01_02 {
 //				return o2.compareTo(o1); //양수,0, 음수  리턴
 //			}
 //		});
-		
 		
 		//[3]
 		Arrays.sort(names, (o1, o2)  -> o2.compareTo(o1));	// 위의 코딩(익명 클래스) 람다식으로 변경

@@ -1,5 +1,5 @@
 package days18;
-
+//시험?
 import java.util.Scanner;
 
 public class Ex09_04 {
@@ -34,12 +34,11 @@ public class Ex09_04 {
 	//[3]
 	private static String solution(int n) {
 		StringBuilder sb = new StringBuilder("");
-		int 몫 = n/2;
-		for (int i = 0; i < 몫; i++) {
+		for (int i = 0; i < n/2; i++) {
 			sb.append("수박");
 		} // for
-		int 나머지 = n%2;
-		if(나머지==1) sb.append("수");
+		
+		if(n%2==1) sb.append("수");
 		return sb.toString();
 	}
 }

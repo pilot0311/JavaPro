@@ -11,8 +11,8 @@ public class Ex04 {
 		//fill03(m);
 		 //fill04(m);
 		 //fill05(m);
-		 fill05_2(m);
-		//magicSquare(m);// 마방진
+		 //fill05_2(m);
+		magicSquare(m);// 마방진
 		dispM(m);
 	} // main
 

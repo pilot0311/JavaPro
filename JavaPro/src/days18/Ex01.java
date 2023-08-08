@@ -25,7 +25,7 @@ public class Ex01 {
 		//박싱 언박싱
 		Integer[] temp= Arrays.stream(m).boxed().toArray(Integer[]::new);
 		Arrays.sort(temp, Collections.reverseOrder());		//Comparable이 구현된 클래스
-		
+	//	m=Arrays.stream(temp).mapToInt(null)
 		System.out.println(Arrays.toString(temp));
 		
 	} // main

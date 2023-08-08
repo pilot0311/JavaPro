@@ -4,7 +4,7 @@ public class Ex03 {
 
 	public static void main(String[] args) {
 		// [Object 클래스] + 메서드
-		// 모든 클래스의 최사위 부모클래스
+		// 모든 클래스의 최상위 부모클래스
 		// 필드 X
 		//메서드 11개 존재
 		Item item1 = new Item(10);
