@@ -18,7 +18,7 @@ public class dateTest {
 		Date d = new Date(year - 1900, month - 1, 1); // 2023.8.1
 		Date temp = new Date();
 		Date today = new Date(temp.getYear(), temp.getMonth(), temp.getDate());
-
+		
 		int date = d.getDate() - dayOfWeek;
 		d.setDate(date);
 		// System.out.println( d.toLocaleString());

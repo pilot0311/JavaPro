@@ -7,41 +7,27 @@ public class Ex02test {
 	public static void main(String[] args) {
 		int year = 2023;
 		int month = 8;
-
-
-		int dayOfWeek = getDayOfWeek(year, month, 1);
 		int lastDay = getLastDay(year, month);
+		int dayOfWeek = getDayOfWeek(year, month, 1);
 
-
-		Date d = new Date(year - 1900, month - 1, 1); // 2023.8.1
-
-		int date = d.getDate() - dayOfWeek;
-		d.setDate(date);
-		
-		System.out.printf("\t\t%d.%d\n",year,month);
-		for (int i = 0; i < 7; i++) {
-			System.out.printf("%s\t", "일월화수목금토".charAt(i));
-		} // for
-		System.out.println();
-		for (int i = 1; i <= 35; i++) {
-
-
-			int m = d.getMonth() + 1;
-
-			// d.getDate() );
-			if (m != month) {
-				System.out.printf("\t");
+		Date StartDay = new Date(year, month - 1, 1);
+		StartDay.setDate(StartDay.getDate() - dayOfWeek);
+		// Date temp = new Date();
+		// Date today = new Date(temp.getYear(), temp.getMonth(), temp.getDate());
+		int m;
+		for (int i = 1; i <= 42; i++) {
+			m = StartDay.getMonth() + 1;
+			if (month == m) {
+				System.out.printf("%d\t", StartDay.getDate());
 			} else {
-				System.out.printf("%2d\t", d.getDate());
+				System.out.printf("\t");
 			}
-			// 년, 월, 일
 
 			if (i % 7 == 0) {
 				System.out.println();
-			}
-			date = d.getDate() + 1;
-			d.setDate(date);
 
+			} // if
+			StartDay.setDate(StartDay.getDate() + 1);
 		} // for
 
 	} // main
@@ -56,5 +42,19 @@ public class Ex02test {
 	private static int getDayOfWeek(int year, int month, int date) {
 		Date d = new Date(year - 1900, month - 1, date);
 		return d.getDay(); // 0(일)~6(토)
-	} // main
+	}
+
+	private static boolean isEqualsDate(Date d1, Date d2) {
+		int index = 10;
+		d1.setHours(0);
+		d1.setMinutes(0);
+		d1.setSeconds(0);
+		d2.setHours(0);
+		d2.setMinutes(0);
+		d2.setSeconds(0);
+		//String s1 = d1.toLocaleString().substring(0, index);
+		//String s2 =  d2.toLocaleString().substring(0, index);
+		return d1.toLocaleString().equals(d2.toLocaleString());
+	}
+
 }
