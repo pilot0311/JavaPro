@@ -26,7 +26,7 @@ public class Ex01 {
       String line = null;
       try (FileReader fr = new FileReader(path);BufferedReader br = new BufferedReader(fr)){
          while(  (line = br.readLine()) != null ) {
-             if( line.equals("2조") ) {
+             if( line.equals("1조") ) {
                 line = br.readLine();
                 System.out.println( line );
                 break;
@@ -46,7 +46,7 @@ public class Ex01 {
             teamLeader = teamMembers[i].replace("(팀장)", ""); 
             // break;
             continue;
-         }         
+         }  //if
          // 팀원
          teamMembers2[index++] = teamMembers[i]; 
       } // for

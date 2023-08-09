@@ -30,6 +30,7 @@ public class Ex13_02 {
        int date = d.getDate() - dayOfWeek;
        d.setDate(date);
        // System.out.println( d.toLocaleString());
+       
        for (int i = 1; i <= 42; i++) { 
     	   
     	   //true/false d.after(d2)
