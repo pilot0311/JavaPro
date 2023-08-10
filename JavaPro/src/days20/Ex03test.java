@@ -16,21 +16,20 @@ public class Ex03test {
 
 	} // main
 
-	private static void dispDiffDays(Date d, Date today) {
+	public static void dispDiffDays(Date d, Date today) {
 		long diff = today.getTime() - d.getTime();
-
 		int[] time = { 1000 * 60 * 60 * 24, 1000 * 60 * 60, 1000 * 60, 1000, 1 };
 		String[] timea = { "일", "시간", "분", "초", "ms" };
 		for (int i = 0; i < time.length; i++) {
 			System.out.printf(" %d%s", (diff / time[i]), timea[i]);
 			diff %= time[i];
 		}
-		System.out.println(" 지났음");
-		try {
-			Thread.sleep(1000); //1s
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} 
-		dispDiffDays(d, new Date());
+//		System.out.println(" 지났음");
+//		try {
+//			Thread.sleep(1000); //1s
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} 
+//		dispDiffDays(d, new Date());
 	}
 }
