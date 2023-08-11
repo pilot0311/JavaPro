@@ -28,9 +28,11 @@ public class Ex14 {
 		for (int i = 0; i < t1Arr.length; i++) {
 			
 			team1.add(t1Arr[i]);
+			//team1.add(t1.split("\\s*,\\s*"));
+			
 		} // for
 		
-		//System.out.println(team1);
+		System.out.println(team1);
 		
 		ArrayList team2 = new ArrayList();
 		team2.add("유희진");

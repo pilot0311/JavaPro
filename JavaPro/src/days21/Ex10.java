@@ -26,13 +26,14 @@ public class Ex10 {
 		//오늘 날짜
 		LocalDate t = LocalDate.now();
 		t = t.plusDays(1);
+		System.out.println(t);
 		//개강일과 오늘 날짜 사이의 간격
 		//	날짜 차							s<=t
 		Period p = Period.between(s, t);
 		int year =p.getYears();
 		System.out.println(year);
 		long month = p.get(ChronoUnit.MONTHS);
-		System.out.println(month);
+		System.out.println("m:"+month);
 		long day = p.getDays();
 		System.out.println(day);
 		

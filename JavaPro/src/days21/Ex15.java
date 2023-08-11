@@ -53,46 +53,51 @@ public class Ex15 {
 		} while (Character.toUpperCase(con) == 'Y');
 		//	[문제]
 		// 1.등수처리
-//		for (int i = 0; i < list.size(); i++) {
-//		    Student currentStudent = (Student) list.get(i);
-//		    double currentAvg = currentStudent.getAvg();
-//		     rank = 1;
-//
-//		    for (int j = 0; j < list.size(); j++) {
-//		        if (i != j) {
-//		            Student compareStudent = (Student) list.get(j);
-//		            double compareAvg= compareStudent.getAvg();
-//		            if (currentAvg < compareAvg) {
-//		               rank++;
-//		            }
-//		        }
-//		    }
-//		    currentStudent.setRank(rank);
-//		}
+			
+		Student rs1, rs2;
+		for (int i = 0; i < list.size(); i++) {
+			rs1 = (Student) list.get(i);
+			for (int j = 0; j < list.size(); j++) {
+				rs2 = (Student) list.get(j);
+				if (rs1.getAvg()<rs2.getAvg()) {
+					rs1.setRank(rs1.getRank()+1);
+				} //if
+				
+			} // for
+		} // for
 		
-	
-		Student s1 ,s2;
-	      for (int i = 0; i < list.size(); i++) {
-	         s1 = (Student)list.get(i);
-	         for (int j = 0; j < list.size(); j++) {
-	            s2 = (Student)list.get(j);
-	            if(s1.getTot() < s2.getTot()) {
-	               s1.setRank(s1.getRank() + 1);
-	            }
-	         } // for
-	      } // for
+		
 
 		
 		//	2. 성적 순 출력
-	      list.sort(new Comparator<Student>() {
+		
+		
+		
+		list.sort(new Comparator<Student>() {
 
-	          @Override
-	          public int compare(Student o1, Student o2) {
-	             
-	             return o1.getRank() - o2.getRank();
-	          }
-	       });
-		//모든 학생 출력
+			@Override
+			public int compare(Student o1, Student o2) {
+				
+				return o1.getRank() - o2.getRank(); 
+			}
+		});
+		
+		
+		
+		
+		
+//	      list.sort(new Comparator<Student>() {
+//
+//	          @Override
+//	          public int compare(Student o1, Student o2) {
+//	             
+//	             return o1.getRank() - o2.getRank();
+//	          }
+//	       });
+		
+		
+		
+//		//모든 학생 출력
 		System.out.println(">입력 받은 학생수: " + list.size());
 		Iterator ir = list.iterator();
 		while (ir.hasNext()) {

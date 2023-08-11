@@ -19,6 +19,7 @@ public class Ex08 {
 		//Date d2 = new Date(d.getYear(),d.getMonth()+1,1);
 		//d2.setDate( d2.getDate()-1);
 		//System.out.println(d2.toLocaleString());
+		
 		//	2.	Calendar
 		//Calendar c = Calendar.getInstance();
 		//System.out.println(c.getActualMaximum(Calendar.DATE));

@@ -1,47 +1,38 @@
 package Programmer;
 
-import java.util.Scanner;
+import java.time.LocalDate;
 
-public class Solution {
-
+class Solution {
 	public static void main(String[] args) {
-		//[1]
-//		Scanner sc = new Scanner(System.in);
-//        String a = sc.next();
-//		if(!a.matches("^[a-zA-z]{1,20}$")) {
-//			System.out.printf("영어가 아니거나 20글자를 넘어 갑니다.");
-//			return;
-//		}
-//        char ch[] = new char[a.length()];
-//       for(int i=0;i<a.length();i++) {
-//    	   ch[i]=a.charAt(i);
-//
-//    	  if(ch[i]>='a') {
-//    		  ch[i]= (char) ((int)ch[i]-32);
-//    	  }else 
-//    		  ch[i]= (char) ((int)ch[i]+32);    	  
-//       }//for
-//       a = String.valueOf(ch);
-//       
-//        System.out.printf("%s",a);
-		//[2]
-	        Scanner sc = new Scanner(System.in);
-	        String a = sc.next();
-	        String answer = "";
+		int[][] lines = { { 0, 1 }, { 2, 5 }, { 3, 9 } };
+		int answer = solution(lines);
+	} // main
 
-	        //Stack <Character> stack = new Stack <> ();
+	private static int solution(int[][] lines) {
+		int answer = 0;
+		return answer;
+	}
 
-	        for(Character c : a.toCharArray()){
-	            if(Character.isUpperCase(c)){
-	                //stack.push(Character.toLowerCase(c));
-	                answer += Character.toLowerCase(c);
-	            }
-	            else if(Character.isLowerCase(c)){
-	                //stack.push(Character.toUpperCase(c));
-	                answer += Character.toUpperCase(c);
-	            }
-	        } 
-	        System.out.println(answer);
+	public static int solution(String[] babbling) {
+		int answer = 0;
+		String[] s = { "aya", "ye", "woo", "ma" };
+		String regex = "^!+$";
+		for (int i = 0; i < babbling.length; i++) {
+			for (int j = 0; j < s.length; j++) {
+				babbling[i] = babbling[i].replace(s[j], "!");
+			} // for
+			if (babbling[i].matches(regex))
+				answer++;
+		} // for
+		return answer;
+	}
+
+	public static int solution(int age) {
+		LocalDate ldt = LocalDate.of(2022, 1, 1);
+		int answer = 0;
+		ldt = ldt.minusYears(age);
+		answer = ldt.getYear() + 1;
+		return answer;
 	}
 
 }

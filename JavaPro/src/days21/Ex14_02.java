@@ -75,8 +75,9 @@ public class Ex14_02 {
 				return o1.compareTo(o2);
 			}
 		});	*/
-		class5Clone.sort((o1,o2) ->  o1.compareTo( o2));		
-		class5Clone.sort(String::compareTo);
+		
+		class5Clone.sort((o1,o2)->o1.compareTo(o2));
+		//class5Clone.sort(String::compareTo);
 		//class5Clone.sort(Comparator.naturalOrder());
 		System.out.println(class5Clone);
 		// Collections.sort(class5Clone);
