@@ -9,7 +9,7 @@ public class Ex07 {
 
 	public static void main(String[] args) {
 //		vector 컬렉션 클래스
-		//		ㄴ	List 인터페이스를 구현한 클랫,
+		//		ㄴ	List 인터페이스를 구현한 클래스
 		//		ㄴ	순서유지O 중복 O
 		//		ㄴ	ArrayList 동일(차이점: Vector는 멀티 쓰레드 안전(동기화 처리) )	
 		
