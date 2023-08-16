@@ -22,9 +22,12 @@ public static void main(String[] args) {
 				String url = p.getProperty("url");
 				String user = p.getProperty("user");
 				String password = p.getProperty("password");
-				
-				System.out.println("Load End");
+				System.out.println(className);
+				System.out.println(url);
+				System.out.println(user);
+				System.out.println(password);
 			} catch (Exception e) {
+				System.out.println("Load End");
 				e.printStackTrace();
 			}
 

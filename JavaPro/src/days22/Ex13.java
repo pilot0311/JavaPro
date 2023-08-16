@@ -21,9 +21,9 @@ public class Ex13 {
 //		System.out.println(Arrays.toString(names));
 		
 		//내림차순 정렬
-		//Arrays.sort(names,new StringDescendingComparator());
+		Arrays.sort(names,new StringDescendingComparator());
 		//Arrays.sort(names, String.CASE_INSENSITIVE_ORDER);	//	대소문자 구분하지 않고 오름차순 정렬
-		Arrays.sort(names, Collections.reverseOrder());	
+		//Arrays.sort(names, Collections.reverseOrder());	
 		
 		System.out.println(Arrays.toString(names));
 	} // main

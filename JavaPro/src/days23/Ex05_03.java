@@ -29,7 +29,7 @@ public class Ex05_03 {
 		TreeSet<Integer> ts = new TreeSet<Integer>(list);
 		
 		System.out.println(ts);
-		Arrays.sort(score);
+		//Arrays.sort(score);
 		//	1)	75 보다 큰 점수를 얻어와서 출력
 //		for (int i = 0; i < score.length; i++) {
 //			if (score[i]>75) {
