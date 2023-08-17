@@ -3,56 +3,115 @@ package days25;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 public class Ex01 {
-//팀원 이름 일어와서 출력 HashMap + ArraysList		멤버 VO클래스 만들어서
+
 	public static void main(String[] args) {
-		String fileName = ".\\src\\days19\\1. Java 팀 구성.txt";
-		String line = null;
+		
+		HashMap<TeamVo, ArrayList<MemberVO>> teamGroup = new LinkedHashMap<>();
 		ArrayList<MemberVO> teamList = null;
-		HashMap<String, ArrayList<MemberVO>> teamGroup = new HashMap<>();
-		String teamName;
-		String[] tNames = null;
+		String fileName = ".\\src\\days19\\1. Java 팀 구성.txt";
+		String line = null; 
+		String teamName = null; 
+		TeamVo teamVo = null;
 		MemberVO memberVO = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-			while ((line = br.readLine()) != null) {
+		
+		 try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+			while ((line=br.readLine()) !=null && !line.equals("")) {
+				teamList = new ArrayList<MemberVO>();
 				teamName = line;
 				line = br.readLine();
-				tNames = line.split("\\s*,\\s*");
-				teamList = new ArrayList<MemberVO>();
-				for (String names : tNames) {
-					if (names.contains("(팀장)")) {
-						names=names.replaceAll("(팀장)", "");
-						 memberVO = new MemberVO(names, "팀장");
+				String[] teams = line.split("\\s*,\\s*");
+				for (int i = 0; i < teams.length; i++) {
+					if (teams[i].contains("(팀장)")) {
+						teams[i] = teams[i].replace("(팀장)", "");
+						teamVo = new TeamVo(teamName, teams[i], teams.length);
+						//memberVO = new MemberVO(teams[i], "팀장");
 					} else {
-						 memberVO = new MemberVO(names, "팀원");
+							memberVO = new MemberVO(teams[i], "팀원");
 					} //else
+					
 					teamList.add(memberVO);
-				} //foreach
-				teamGroup.put(teamName, teamList);
-			}
+					
+				} // for
+				
+				teamGroup.put(teamVo, teamList);
+				//TeamVO (name, totalNumber , leader ) 
+				
+			}//while
+			 
+			//만약 key가 중복이 된다면	중복 처리
+			teamVo = new TeamVo("1조","홍길동",1);
+			if (!teamGroup.containsKey(teamVo)) {
+				teamList = null;
+				teamGroup.put(teamVo, teamList);
+			} else {
+					System.out.println("1조는 이미 존재하는 팀입니다");
+			} //else
 			
-			disp(teamGroup);
+			
+			
+				 disp(teamGroup);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		
 	} // main
 
-	private static void disp(HashMap<String, ArrayList<MemberVO>> teamGroup) {
-		Iterator<Entry<String, ArrayList<MemberVO>>> ir = teamGroup.entrySet().iterator();
+	private static void disp(HashMap<TeamVo, ArrayList<MemberVO>> teamGroup) {
+		
+		Iterator<Entry<TeamVo, ArrayList<MemberVO>>> ir = teamGroup.entrySet().iterator();
+		MemberVO teamL = null;
+		
+		TeamVo teamVo = null;
+		String teamName = null;
+		String teamLeader = null;
+		//String name = null;
 		ArrayList<MemberVO> teamList = null;
+		int teamCount = 0;
+		
 		while (ir.hasNext()) {
-			Entry<String, ArrayList<MemberVO>> entry =  ir.next();
-			String key = entry.getKey();
+			Entry<TeamVo, ArrayList<MemberVO>> entry =  ir.next();
+			
+			teamVo = entry.getKey();
 			teamList = entry.getValue();
-			int count = teamList.size();
-			MemberVO teamLeader = teamList.get(0);
-			System.out.printf("[%s(%d명):%s]\n",key,count,teamLeader);
+			teamName = teamVo.getName();
+			teamLeader = teamVo.getLeader();
+			teamCount = teamVo.getTotalNumber();
+			System.out.printf("[%s(%d명) - %s]\n",teamName,teamCount,teamLeader);
+			try {
+				Iterator<MemberVO> ir2 = teamList.iterator();
+				int seq =1;
+				if (ir2.hasNext()) ir2.next();
+				while (ir2.hasNext()) {
+					 teamL = ir2.next();
+					String name = teamL.getName();
+					System.out.printf("  [%d] %s\n",seq++,name);
+				}
+			} catch (NullPointerException e) {	//예외처리
+				System.out.println("팀원이 존재하지 않습니다");
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
 	}
+	
 }
+/*
+key   - TeamVO (name, totalNumber , leader ) 
+value - ArrayList<MemberVO>
+로 저장해서 출력하는 코딩을 하세요. 
+( 조건 1: key 값으로 TeamVO 클래스 선언 )
+( 조건 2: value 값으로 어제 선언한 MemberVO 클래스 사용 )
+*/
