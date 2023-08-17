@@ -54,16 +54,26 @@ public static void main(String[] args) {
                teamList.add(memberVO); // value
                //정렬 테스트
                Collections.sort(teamList, new Comparator<MemberVO>() {
-				@Override
-				public int compare(MemberVO o1, MemberVO o2) {
-					String s1 = o1.getName();
-					String s2 = o2.getName();
-					if (s1.contains("(팀장)")) {
-						return 1;
-					} else
-					return s1.compareTo(s2);
-				}
-			});
+            	   @Override
+            	    public int compare(MemberVO o1, MemberVO o2) {
+            	        String s1 = o1.getName();
+            	        String s2 = o2.getName();
+
+            	        if (s1.contains("(팀장)")) {
+            	            if (s2.contains("(팀장)")) {
+            	                return s1.compareTo(s2); // Both are team leaders, compare normally
+            	            } else {
+            	                return -1; // o1 is team leader, o2 is not, so o1 should come before o2
+            	            }
+            	        } else {
+            	            if (s2.contains("(팀장)")) {
+            	                return 1; // o1 is not a team leader, o2 is, so o1 should come after o2
+            	            } else {
+            	                return s1.compareTo(s2); // Neither is a team leader, compare normally
+            	            }
+            	        }
+            	    }
+            	});
 
 				
             } // foreach             
