@@ -38,7 +38,7 @@ public class Ex01_02 {
 			// 임경재,87,79,80,246,82.000000,true
 			// String.split(",");
 			// [MessageFormat 형식화 클래스 사용]
-			String pattern = "{0},{1},{2},{3},{4},{5},{6}";
+			String pattern = "{0}, {1}, {2}, {3}, {4}, {5}, {6}";
 			MessageFormat mf = new MessageFormat(pattern);
 			Object[] datas = mf.parse(line);
 
@@ -69,7 +69,7 @@ public class Ex01_02 {
 			e.printStackTrace();
 		} // catch
 
-		System.out.println(" end ");
+		System.out.println("end ");
 
 	} // main
 
