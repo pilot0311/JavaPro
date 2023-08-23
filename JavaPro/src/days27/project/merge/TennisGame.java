@@ -7,6 +7,7 @@ public class TennisGame {
 
 	public static void main(String[] args) {
 
+		// 세트수 입력
 		int numberOfSets = 0;
 		while (true) {
 			try {
@@ -19,6 +20,8 @@ public class TennisGame {
 				System.out.println("세트 수는 3, 5만 가능합니다 다시 입력 하세요");
 			}
 		}
+
+		// 단식/복식 여부 입력
 		int numberOfTeamMember = 0;
 		while (true) {
 			try {
@@ -33,9 +36,9 @@ public class TennisGame {
 
 		String name = null;
 		String name2 = null;
+		// 
 		Team p1 = new Team(name, 0, 0, 0);
 		Team p2 = new Team(name, 0, 0, 0);
-//		TennisCounter tennis = null;
 
 		switch (numberOfTeamMember) {
 		case (1):
@@ -69,13 +72,11 @@ public class TennisGame {
 			break;
 		default:
 			System.out.println("잘못 입력 하셨습니다");
-
-			// TennisCounter 객체 생성
-
 		}
-		TennisCounter tennis = new TennisCounter(numberOfSets, p1, p2);
-		int p;
 		
+		// TennisCounter 객체 생성
+		TennisCounter tennis = new TennisCounter(numberOfSets, numberOfTeamMember, p1, p2);
+		int p;
 		
 		while (tennis.winner.equals("")) {
 			p = (int) (Math.random() * 2 + 1);
@@ -83,9 +84,11 @@ public class TennisGame {
 			tennis.calcPoint();
 			tennis.calcGame();
 			tennis.calcSet();
-			tennis.dispScoreBoard();	
+			tennis.dispScoreBoard();
+			
+			
 		}
-		tennis.fileWrite();
+		tennis.exportMatchResult();
 	}
 
 	private static String scanName(String name) {
@@ -126,12 +129,8 @@ public class TennisGame {
 
 	}
 
+	
 	// 미구현
-//		while (MatchIsDone == false) {
-//			tennis.pointWinner(r); // 랜덤 팀 포인트 상승
-//			tennis.calcScore() // 포인트 상승에 따른 점수 처리
-//			tennis.dispScoreBoard() // 현재 스코어보드 출력
-//		}
 //		tennis.printMatchWinner(); // 승자와 최종 스코어보드 출력 후 파일 저장
 
 }

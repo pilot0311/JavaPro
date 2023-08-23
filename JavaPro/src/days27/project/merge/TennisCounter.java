@@ -2,6 +2,8 @@ package days27.project.merge;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TennisCounter {
 
@@ -12,10 +14,12 @@ public class TennisCounter {
 	int currentSet = 0;
 	boolean thisSetIsDuece = false;
 	String winner = "";
+	int numberOfTeamMember = 1;
+	Object[][] printFormat = new Object[3][];
 
-	public TennisCounter(int numberOfSet, Team p1, Team p2) {
-		super();
+	public TennisCounter(int numberOfSet, int numberOfTeamMember, Team p1, Team p2) {
 		this.numberOfSet = numberOfSet;
+		this.numberOfTeamMember = numberOfTeamMember;
 		this.team1 = p1;
 		this.team2 = p2;
 		this.gameScores = new int[numberOfSet][2];
@@ -34,85 +38,46 @@ public class TennisCounter {
 	}
 
 	public void dispScoreBoard() {
-	      Object[][] printFormat = new Object[3][];
-	      if (numberOfSet == 3) {
-	         printFormat[0] = new String[] {team1.name.contains("/")?"────────":"───", "Point", "Set1", "Set2", "Set3", "Match" };
-	         printFormat[0][currentSet + 2] += "*";
-	         printFormat[1] = new Object[] { team1.name, team1.pointStr, gameScores[0][0], gameScores[1][0],
-	               gameScores[2][0], (team1.name.equals(winner) ? "WIN" : "") };
-	         printFormat[2] = new Object[] { team2.name, team2.pointStr, gameScores[0][1], gameScores[1][1],
-	               gameScores[2][1], (team2.name.equals(winner) ? "WIN" : "") };
+		int nameLength = (team1.name.length() > team2.name.length() ? team1.name.length() : team2.name.length());
+		int tabSize = (nameLength >= 8 ? 2 : (nameLength >= 4 ? 1 : 0));
+		if (numberOfSet == 3) {
+			printFormat[0] = new String[] { "-" + "\t-".repeat(tabSize), " Point", " Set1", " Set2", " Set3", "Match" };
+			printFormat[0][currentSet + 2] += "*";
+			printFormat[1] = new Object[] { team1.name, team1.pointStr, gameScores[0][0], gameScores[1][0],
+					gameScores[2][0], (team1.name.equals(winner) ? "WIN" : "") };
+			printFormat[2] = new Object[] { team2.name, team2.pointStr, gameScores[0][1], gameScores[1][1],
+					gameScores[2][1], (team2.name.equals(winner) ? "WIN" : "") };
 
-	      } else if (numberOfSet == 5) {
-	         printFormat[0] = new String[] {team1.name.contains("/")?"────────":"───", " Point ", " Set1 ", " Set2 ", " Set3 ", " Set4 ", " Set5 ", "Match " };
-	         printFormat[0][currentSet + 2] += "*";
-	         printFormat[1] = new Object[] { team1.name, team1.pointStr, gameScores[0][0], gameScores[1][0],
-	               gameScores[2][0], gameScores[3][0], gameScores[4][0], (team1.name.equals(winner) ? "WIN" : "") };
-	         printFormat[2] = new Object[] { team2.name, team2.pointStr, gameScores[0][1], gameScores[1][1],
-	               gameScores[2][1], gameScores[3][1], gameScores[4][1], (team2.name.equals(winner) ? "WIN" : "") };
-	      }
-
-	      System.out.println();
-
-	      System.out.println("─".repeat(65));
-	      for (int i = 0; i < printFormat.length; i++) {
-	         for (int j = 0; j < printFormat[i].length; j++) {
-	            String s = String.valueOf(printFormat[i][j]);
-	            System.out.printf("%5s\t│%s",s,(j == printFormat[i].length - 1 ? "\n" : ""));
-	            //System.out.print(printFormat[i][j] + "\t│" + (j == printFormat[i].length - 1 ? "\n" : ""));
-	         }
-	         System.out.println("─".repeat(65));
-	      }
-	      if (thisSetIsDuece) {
-	         System.out.printf("현재 Set %d는 게임스코어 듀스 진행 중입니다.\n\n", currentSet + 1);
-	      }
-	      // 결과 템플릿 미리 만들고 값만 넣기 vs 호출할 때 만들기
-
-	      // 현재의 스코어보드를 화면에 출력한다.
-	      // 객체가 있어야 스코어보드를 출력할 수 있으니, static으로 선언하지 않는다.
-//	      System.out.println(numberOfSet + ", " + team1.toString() + ", " + team2.toString());
-
-	   }
-
-	public void fileWrite() {
-		String pathname = ".\\src\\days27\\project\\merge\\gameInfo.txt";
-		File file = new File(pathname);
-		Object[][] printFormat = new Object[3][];
-		
-		try(FileWriter fw = new FileWriter(file, false)) {
-			if (numberOfSet == 3) {
-				printFormat[0] = new String[] {team1.name.contains("/")?"────────":"───", "Point", "Set1", "Set2", "Set3", "Match" };
-				printFormat[0][currentSet + 2] += "*";
-				printFormat[1] = new Object[] { team1.name, team1.pointStr, gameScores[0][0], gameScores[1][0],
-						gameScores[2][0], (team1.name.equals(winner) ? "WIN" : "") };
-				printFormat[2] = new Object[] { team2.name, team2.pointStr, gameScores[0][1], gameScores[1][1],
-						gameScores[2][1], (team2.name.equals(winner) ? "WIN" : "") };
-
-			} else if (numberOfSet == 5) {
-				printFormat[0] = new String[] {team1.name.contains("/")?"────────":"───", " Point ", " Set1 ", " Set2 ", " Set3 ", " Set4 ", " Set5 ", "Match " };
-				printFormat[0][currentSet + 2] += "*";
-				printFormat[1] = new Object[] { team1.name, team1.pointStr, gameScores[0][0], gameScores[1][0],
-						gameScores[2][0], gameScores[3][0], gameScores[4][0], (team1.name.equals(winner) ? "WIN" : "") };
-				printFormat[2] = new Object[] { team2.name, team2.pointStr, gameScores[0][1], gameScores[1][1],
-						gameScores[2][1], gameScores[3][1], gameScores[4][1], (team2.name.equals(winner) ? "WIN" : "") };
-			}
-			fw.append("─".repeat(65)).append("\n");
-			for (int i = 0; i < printFormat.length; i++) {
-				for (int j = 0; j < printFormat[i].length; j++) {
-					String s = String.valueOf(printFormat[i][j]);
-					String data = String.format("%5s\t│%s",s,(j == printFormat[i].length - 1 ? "\n" : ""));
-					fw.append(data);
-				}
-				fw.append("─".repeat(65)).append("\n");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("저장 실패");
+		} else if (numberOfSet == 5) {
+			printFormat[0] = new String[] { "-" + "\t-".repeat(tabSize), " Point", " Set1", " Set2", " Set3", " Set4",
+					" Set5", "Match" };
+			printFormat[0][currentSet + 2] += "*";
+			printFormat[1] = new Object[] { team1.name, team1.pointStr, gameScores[0][0], gameScores[1][0],
+					gameScores[2][0], gameScores[3][0], gameScores[4][0], (team1.name.equals(winner) ? "WIN" : "") };
+			printFormat[2] = new Object[] { team2.name, team2.pointStr, gameScores[0][1], gameScores[1][1],
+					gameScores[2][1], gameScores[3][1], gameScores[4][1], (team2.name.equals(winner) ? "WIN" : "") };
 		}
-		
+
+		System.out.println();
+
+		System.out.println("─".repeat(nameLength + 18 + (numberOfSet + 4) * 6));
+		for (int i = 0; i < printFormat.length; i++) {
+			for (int j = 0; j < printFormat[i].length; j++) {
+				System.out.print(printFormat[i][j] + "\t│" + (j == printFormat[i].length - 1 ? "\n" : ""));
+			}
+			System.out.println("─".repeat(nameLength + 18 + (numberOfSet + 4) * 6));
+		}
+		if (thisSetIsDuece) {
+			System.out.printf("현재 Set %d는 게임스코어 듀스 진행 중입니다.\n\n", currentSet + 1);
+		}
+		// 결과 템플릿 미리 만들고 값만 넣기 vs 호출할 때 만들기
+
+		// 현재의 스코어보드를 화면에 출력한다.
+		// 객체가 있어야 스코어보드를 출력할 수 있으니, static으로 선언하지 않는다.
+//		System.out.println(numberOfSet + ", " + team1.toString() + ", " + team2.toString());
+
 	}
-	
-	
+
 	public void duecePointWinner(int p) {
 		if (p == 1) {
 			team1.pointsOfDuece += 1;
@@ -173,13 +138,9 @@ public class TennisCounter {
 		gameScores[currentSet][1] = team2.numberOfWonGames;
 
 		thisSetIsDuece = team1.numberOfWonGames >= 5 && team2.numberOfWonGames >= 5;
-//		boolean isDuece = team1.numberOfWonGames >= 5 && team2.numberOfWonGames >= 5;
 		if (thisSetIsDuece) {
-//			this.dispScoreBoard(); // 게임스코어 보여주기
-
 			int p;
 
-//			System.out.println("************************ Deuce = Game 5:5 ************************ ");
 			if (Math.abs(team1.numberOfWonGames - team2.numberOfWonGames) == 2
 					&& (team1.numberOfWonGames >= 7 || team2.numberOfWonGames >= 7)) {
 				if (team1.numberOfWonGames > team2.numberOfWonGames) {
@@ -206,14 +167,47 @@ public class TennisCounter {
 	}
 
 	public void calcSet() {
-		if (team1.numberOfWonSets == numberOfSet / 2 + 1) {
-			// team1 winner
-			winner = team1.name;
-		} else if (team2.numberOfWonSets == numberOfSet / 2 + 1) {
-			winner = team2.name;
+		int lastSetNumber = numberOfSet / 2 + 1;
+		if (team1.numberOfWonSets == lastSetNumber || team2.numberOfWonSets == lastSetNumber) {
+			if (team1.numberOfWonSets == lastSetNumber) {
+				winner = team1.name;
+			} else if (team2.numberOfWonSets == lastSetNumber) {
+				winner = team2.name;
+			}
+			currentSet = numberOfSet;
 		}
 
 	}
+
+	public void exportMatchResult() {
+		
+		System.out.println("=====================================\n\t" + "승자 : " + this.winner + "\n=====================================\n\n");
+		
+		
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
+		String creationTime = sdf.format(now);
+		// 콘솔 직접 열어서 실행 시, 전체 경로가 아니면
+		
+		String pathname = System.getProperty("user.dir") + "\\src\\days27\\project\\merge\\MatchResult_" + creationTime + ".txt";
+		File file = new File(pathname);
+		
+		try (FileWriter fw = new FileWriter(file)) {
+			System.out.println("결과 파일을 생성합니다.");
+			file.createNewFile();
+			for (int i = 0; i < printFormat.length; i++) {
+				for (int j = 0; j < printFormat[i].length; j++) {
+					fw.append(printFormat[i][j] + "\t│" + (j == printFormat[i].length - 1 ? "\n" : ""));
+				}
+			}
+			fw.flush();
+			System.out.println("결과 파일 생성 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("실패");
+		}
+	}
+
 }
 
 class Team {
@@ -246,12 +240,6 @@ class Team {
 	public void resetPointsOfDeuce() {
 		this.pointsOfDuece = 5;
 		this.pointStr = TennisCounter.pointFormat[pointsOfDuece];
-	}
-
-	@Override
-	public String toString() {
-		return "Player [name=" + name + ", point=" + point + ", pointStr=" + pointStr + ", numberOfWongames="
-				+ numberOfWonGames + ", numberOfWonSets=" + numberOfWonSets + "]";
 	}
 
 }
