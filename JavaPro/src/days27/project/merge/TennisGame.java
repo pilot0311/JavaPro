@@ -77,7 +77,7 @@ public class TennisGame {
 		// TennisCounter 객체 생성
 		TennisCounter tennis = new TennisCounter(numberOfSets, numberOfTeamMember, p1, p2);
 		int p;
-		
+		//t
 		while (tennis.winner.equals("")) {
 			p = (int) (Math.random() * 2 + 1);
 			tennis.pointWinner(p);
