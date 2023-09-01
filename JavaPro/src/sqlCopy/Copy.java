@@ -47,8 +47,13 @@ public class Copy {
 
 	   public static String getTodayDirName(String lastDirName) {
 	      int a = Integer.parseInt(lastDirName.substring(4))+1;
+	      if(a<10) {
 	      String todayDirName = "days" + ("00"+a).substring(1);
 	      return todayDirName;
+	      } else {
+	    	  String todayDirName = "days" + a;
+		      return todayDirName;
+	      }
 	   }
 
 	}
